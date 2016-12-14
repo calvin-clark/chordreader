@@ -6,8 +6,8 @@ import java.util.Scanner;
  * the chord those notes create.
  * Author: Calvin Clark
  */
-
 public class Main {
+    private static String[] notes = new String[]{"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
     /**
      * Prints the prompts to the command line and initializes the scanner to read in
      * the notes.
@@ -45,33 +45,13 @@ public class Main {
         System.out.print("Next note: ");
         Scanner scan = new Scanner(System.in);
         String note = scan.next();
-        if(note.equals("C") || note.equals("B#"))
-            return 0;
-        if(note.equals("C#") || note.equals("Db"))
-            return 1;
-        if(note.equals("D"))
-            return 2;
-        if(note.equals("D#") || note.equals("Eb"))
-            return 3;
-        if(note.equals("E") || note.equals("Fb"))
-            return 4;
-        if(note.equals("F") || note.equals("E#"))
-            return 5;
-        if(note.equals("F#") || note.equals("Gb"))
-            return 6;
-        if(note.equals("G"))
-            return 7;
-        if(note.equals("G#") || note.equals("Ab"))
-            return 8;
-        if(note.equals("A"))
-            return 9;
-        if(note.equals("A#") || note.equals("Bb"))
-            return 10;
-        if(note.equals("B") || note.equals("Cb"))
-            return 11;
+        for(int i = 0; i < notes.length; i++){
+            if(note.equals(notes[i])){
+                return i;
+            }
+        }
         System.out.println("Invalid Note");
-        return newNote();
-
+        return(newNote());
     }
 
     /**
@@ -150,32 +130,7 @@ public class Main {
      * @return a string of the note name
      */
     public static String numToNote(int num){
-        if(num == 0)
-            return("C/B#");
-        if(num == 1)
-            return("C#/Db");
-        if(num == 2)
-            return("D");
-        if(num == 3)
-            return("D#/Eb");
-        if(num == 4)
-            return("E/Fb");
-        if(num == 5)
-            return("F/E#");
-        if(num == 6)
-            return("F#/Gb");
-        if(num == 7)
-            return("G");
-        if(num == 8)
-            return("G#/Ab");
-        if(num == 9)
-            return("A");
-        if(num == 10)
-            return("A#/Bb");
-        if(num == 11)
-            return("B/Cb");
-        else
-            return "Invalid Note";
+        return (notes[num]);
     }
     public static void main(String[] args){
         makeChord();
