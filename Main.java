@@ -1,7 +1,17 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * A simple program that takes letters representing note values and outputs
+ * the chord those notes create.
+ * Author: Calvin Clark
+ */
+
 public class Main {
+    /**
+     * Prints the prompts to the command line and initializes the scanner to read in
+     * the notes.
+     */
     public static void makeChord() {
         System.out.println("Notes should be represented as a letter, with # or b for sharp/flat");
         System.out.print("Number of notes: ");
@@ -13,6 +23,12 @@ public class Main {
         }
         System.out.print(chord(notes));
     }
+
+    /**
+     * Converts a chord into an array of intervals within that chord.
+     * @param chord the int[] representing the current chord
+     * @return an array of intervals within the chord
+     */
     public static int[] findIntervals(int[] chord){
         int[] intervals = new int[chord.length-1];
         for(int i=0; i<chord.length-1; i++){
@@ -20,6 +36,11 @@ public class Main {
         }
         return intervals;
     }
+
+    /**
+     * Asks the user for the next note and converts it to an int
+     * @return the int representing the next note
+     */
     public static int newNote(){
         System.out.print("Next note: ");
         Scanner scan = new Scanner(System.in);
@@ -52,6 +73,12 @@ public class Main {
         return newNote();
 
     }
+
+    /**
+     * Converts the chord's int[] to a chord name
+     * @param notes the notes within the chord
+     * @return a string of the chord name
+     */
     public static String chord(int[] notes){
         int size = 0;
         for(int i=0; i<notes.length; i++){
@@ -116,6 +143,12 @@ public class Main {
 
 
     }
+
+    /**
+     * Converts a number back to a note
+     * @param num the number to be converted
+     * @return a string of the note name
+     */
     public static String numToNote(int num){
         if(num == 0)
             return("C/B#");
