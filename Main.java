@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -17,9 +18,17 @@ public class Main {
         System.out.print("Number of notes: ");
         Scanner sc = new Scanner(System.in);
         int[] notes = new int[12];
-        int numNotes = sc.nextInt();
-        for (int i = 0; i < numNotes; i++) {
-            notes[newNote()]++;
+        int numNotes = 0;
+        while(numNotes == 0){
+            try {
+                numNotes = sc.nextInt();
+                for (int i = 0; i < numNotes; i++) {
+                    notes[newNote()]++;
+                }
+            }
+            catch(InputMismatchException i){
+                System.out.println("Enter a valid number value.");
+            }
         }
         System.out.print(chord(notes));
     }
