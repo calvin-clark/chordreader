@@ -112,16 +112,16 @@ public class Main {
             if (intervals.contains(7)) { //perfect fifth
                 return (numToNote(chord[0]) + "5");
             }
-            if(intervals.contains(8)){ //augmented fifth
+            if(intervals.contains(8)){ //augmented fifth or minor sixth
                 return (numToNote(chord[0]) + "aug");
             }
-            if(intervals.contains(9)){ //minor sixth
+            if(intervals.contains(9)){ //major sixth
                 return (numToNote(chord[1]) + "min");
             }
-            if(intervals.contains(10)){ //major sixth
+            if(intervals.contains(10)){ //minor seventh
                 return (numToNote(chord[0]) + "7");
             }
-            if(intervals.contains(11)){ //major sixth
+            if(intervals.contains(11)){ //major seventh
                 return (numToNote(chord[0]) + "maj7");
             }
         }
