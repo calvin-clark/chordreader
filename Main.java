@@ -55,8 +55,8 @@ public class Main {
         String note = scan.next();
         if(note.substring(1).equals("b")){
             flat = true;
-            note = note.substring(0, 1);
         }
+        note = note.substring(0, 1).toUpperCase();
         for(int i = 0; i < notes.length; i++){
             if(note.equals(notes[i])){
                 if(flat){
@@ -90,7 +90,10 @@ public class Main {
             }
         }
         List<Integer> intervals = findIntervals(chord);
-        if(intervals.size() == 1){
+        if((intervals.size() == 0)) { //single note
+            return (numToNote(chord[0]));
+        }
+        if(intervals.size() == 1){ //2 note intervals
             if(intervals.contains(1)){ //minor second
                 return (numToNote(chord[0]) + "min2");
             }
@@ -125,10 +128,7 @@ public class Main {
                 return (numToNote(chord[0]) + "maj7");
             }
         }
-        if((intervals.size() == 0)) {
-            return (numToNote(chord[0]));
-        }
-        if(intervals.size() == 2) { //chord is a triad
+        if(intervals.size() == 2) { //triads
             if(intervals.contains(6)){ //diminished fifth
                 int location = 0;
                 if(intervals.get(1) == 6){
