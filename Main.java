@@ -49,11 +49,19 @@ public class Main {
      * @return the int representing the next note
      */
     public static int newNote(){
+        boolean flat = false;
         System.out.print("Next note: ");
         Scanner scan = new Scanner(System.in);
         String note = scan.next();
+        if(note.substring(1).equals("b")){
+            flat = true;
+            note = note.substring(0, 1);
+        }
         for(int i = 0; i < notes.length; i++){
             if(note.equals(notes[i])){
+                if(flat){
+                    return i-1;
+                }
                 return i;
             }
         }
@@ -90,42 +98,45 @@ public class Main {
                 return (numToNote(chord[1]) + "5");
             }
         }
-        if((intervals.size() == 0) || (intervals.get(0) == 4)) {
+        if((intervals.size() == 0)) {
             return (numToNote(chord[0]));
         }
-        if(intervals.size() >= 1 && intervals.get(1) == 4) {
-            return (numToNote(chord[1]));
+        if(intervals.size() == 2) { //chord is a triad
+            if(intervals.contains(6)){ //diminished fifth
+                int location = 0;
+                if(intervals.get(1) == 6){
+                    location = 2;
+                }
+                else{
+                    location = 1;
+                }
+                return(numToNote(chord[location]) + "dim");
+            }
+            if(intervals.get(0) == 3){ //minor third
+                if(intervals.get(1) == 4){ //major third
+                    return(numToNote(chord[0]) + "min");
+                }
+                if(intervals.get(1) == 3){//minor third
+                    return(numToNote(chord[0]) + "dim");
+                }
+            }
+            if(intervals.get(0) == 4){ //major third
+                if(intervals.get(1) == 3){ //minor third
+                    return(numToNote(chord[0]));
+                }
+                if(intervals.get(1) == 5){ //perfect fourth
+                    return(numToNote(chord[2]) + "min");
+                }
+                if(intervals.get(1) == 4){ //major third
+                    return(numToNote(chord[0]) + "aug");
+                }
+            }
+            if(intervals.get(0) == 5){ //perfect fourth
+                if(intervals.get(1) == 4){ //major third
+                    return(numToNote(chord[1]));
+                }
+            }
         }
-        if(
-                ((chord.length == 3) && (((chord[1]-chord[0] == 3) && (chord[2]-chord[1]==5))))
-                )
-            return(numToNote(chord[2]));
-
-        if(
-                ((chord.length == 2) && (chord[1]-chord[0] == 3))||
-                ((chord.length == 3) && (((chord[1]-chord[0] == 3) && (chord[2]-chord[1]==4))))
-                )
-            return(numToNote(chord[0])+"min");
-        if(
-                (chord.length == 2 && (chord[1]-chord[0]== 9))||
-                (chord.length == 3 && (chord[1]-chord[0]==4)&&(chord[2]-chord[1]==4))
-                )
-            return(numToNote(chord[1])+"min");
-        if(
-                ((chord.length == 3) &&(chord[1]-chord[0]==4)&&(chord[2]-chord[1]==5))
-                )
-            return(numToNote(chord[2])+"min");
-
-        if (
-                (chord.length == 2 && (chord[1]-chord[0]== 10)) ||
-                (chord.length == 3 && (chord[1]-chord[0]==4)&&(chord[2]-chord[0]==10))||
-                (chord.length == 4 && (chord[1]-chord[0]==4)&&(chord[3]-chord[0]==10)&&(chord[2]-chord[1]==3))
-                )
-            return(numToNote(chord[0])+"7");
-        if (
-                (chord.length == 2 && (chord[1]-chord[0]== 2))
-                )
-            return(numToNote(chord[1])+"7");
         return("Unknown Chord");
 
 
