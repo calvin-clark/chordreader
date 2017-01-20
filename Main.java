@@ -91,11 +91,38 @@ public class Main {
         }
         List<Integer> intervals = findIntervals(chord);
         if(intervals.size() == 1){
-            if (intervals.contains(7)) {
+            if(intervals.contains(1)){ //minor second
+                return (numToNote(chord[0]) + "min2");
+            }
+            if(intervals.contains(2)){ //major second
+                return (numToNote(chord[0]) + "2");
+            }
+            if(intervals.contains(3)){ //minor third
+                return (numToNote(chord[0]) + "min");
+            }
+            if(intervals.contains(4)){ //major third
+                return (numToNote(chord[0]));
+            }
+            if(intervals.contains(5)){ //perfect fourth
+                return (numToNote(chord[1]) + "5");
+            }
+            if(intervals.contains(6)){ //diminished fifth
+                return (numToNote(chord[0]) + "dim");
+            }
+            if (intervals.contains(7)) { //perfect fifth
                 return (numToNote(chord[0]) + "5");
             }
-            if(intervals.contains(5)){
-                return (numToNote(chord[1]) + "5");
+            if(intervals.contains(8)){ //augmented fifth
+                return (numToNote(chord[0]) + "aug");
+            }
+            if(intervals.contains(9)){ //minor sixth
+                return (numToNote(chord[1]) + "min");
+            }
+            if(intervals.contains(10)){ //major sixth
+                return (numToNote(chord[0]) + "7");
+            }
+            if(intervals.contains(11)){ //major sixth
+                return (numToNote(chord[0]) + "maj7");
             }
         }
         if((intervals.size() == 0)) {
@@ -138,8 +165,6 @@ public class Main {
             }
         }
         return("Unknown Chord");
-
-
     }
 
     /**
