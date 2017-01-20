@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * A simple program that takes letters representing note values and outputs
@@ -15,18 +13,18 @@ public class Main {
      */
     public static void makeChord() {
         System.out.println("Notes should be represented as a letter, with # or b for sharp/flat");
-        System.out.print("Number of notes: ");
-        Scanner sc = new Scanner(System.in);
         int[] notes = new int[12];
         int numNotes = 0;
         while(numNotes == 0){
             try {
+                System.out.print("Number of notes: ");
+                Scanner sc = new Scanner(System.in);
                 numNotes = sc.nextInt();
                 for (int i = 0; i < numNotes; i++) {
                     notes[newNote()]++;
                 }
             }
-            catch(InputMismatchException i){
+            catch(RuntimeException r){
                 System.out.println("Enter a valid number value.");
             }
         }
@@ -38,10 +36,10 @@ public class Main {
      * @param chord the int[] representing the current chord
      * @return an array of intervals within the chord
      */
-    public static int[] findIntervals(int[] chord){
-        int[] intervals = new int[chord.length-1];
+    public static List<Integer> findIntervals(int[] chord){
+        List<Integer> intervals = new ArrayList<>();
         for(int i=0; i<chord.length-1; i++){
-            intervals[i] = chord[i=1]-chord[i];
+            intervals.add(chord[i+1]-chord[i]);
         }
         return intervals;
     }
@@ -83,21 +81,21 @@ public class Main {
                 count++;
             }
         }
-        //int[] intervals = findIntervals(chord);
-        //if((chord.length == 2) && () ){
-        //    return(numToNote(chord[0])+"5");
-        //}
-        if(
-                (chord.length == 1) ||
-                ((chord.length == 2) && (chord[1]-chord[0] == 4))||
-                ((chord.length == 3) && (chord[1]-chord[0] == 4) && (chord[2]-chord[1]==3))
-                )
-            return(numToNote(chord[0]));
-        if(
-                (chord.length == 2 && (chord[1]-chord[0]== 8))||
-                (chord.length == 3 && (chord[1]-chord[0]==5)&&(chord[2]-chord[1]==4))
-                )
-            return(numToNote(chord[1]));
+        List<Integer> intervals = findIntervals(chord);
+        if(intervals.size() == 1){
+            if (intervals.contains(7)) {
+                return (numToNote(chord[0]) + "5");
+            }
+            if(intervals.contains(5)){
+                return (numToNote(chord[1]) + "5");
+            }
+        }
+        if((intervals.size() == 0) || (intervals.get(0) == 4)) {
+            return (numToNote(chord[0]));
+        }
+        if(intervals.size() >= 1 && intervals.get(1) == 4) {
+            return (numToNote(chord[1]));
+        }
         if(
                 ((chord.length == 3) && (((chord[1]-chord[0] == 3) && (chord[2]-chord[1]==5))))
                 )
