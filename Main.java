@@ -1,8 +1,10 @@
 import java.util.*;
 
 /**
- * A simple program that takes letters representing note values and outputs
- * the chord those notes create.
+ * A program that takes letters representing note values as a command line input
+ * and outputs the chord those notes create as a string, containing the root and a
+ * description of a chord, using min for minor, aug for augmented, dim for diminished,
+ * and numbers for other intervals.
  * Author: Calvin Clark
  */
 public class Main {
